@@ -1,4 +1,4 @@
-package com.packtpub.libgdx.canyonbunny.game;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.InputAdapter;
-import com.packtpub.libgdx.canyonbunny.util.CameraHelper;
+import com.mygdx.game.util.CameraHelper;
 
 public class WorldController extends InputAdapter
 {
@@ -18,6 +18,7 @@ public class WorldController extends InputAdapter
 	public Sprite[] testSprites;
 	public int selectedSprite;
 	public CameraHelper cameraHelper;
+
 	
 	public WorldController()
 	{
@@ -181,6 +182,8 @@ public class WorldController extends InputAdapter
 		}
 		return false;
 	}
+	
+	
 }
 
 

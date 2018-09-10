@@ -1,7 +1,5 @@
 package com.mygdx.game;
 import com.badlogic.gdx.ApplicationListener;
-import com.packtpub.libgdx.canyonbunny.game.WorldController;
-import com.packtpub.libgdx.canyonbunny.game.WorldRenderer;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
@@ -11,7 +9,7 @@ public class CanyonBunnyMain implements ApplicationListener
 {
 	private final static String TAG = CanyonBunnyMain.class.getName();
 	private WorldController worldController;
-	private WorldController worldRenderer;
+	private com.mygdx.game.WorldRenderer worldRenderer;
 	private boolean paused;
 	
 	@Override
