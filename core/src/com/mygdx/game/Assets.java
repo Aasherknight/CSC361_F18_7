@@ -44,22 +44,22 @@ public class Assets implements Disposable, AssetErrorListener
 		Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames());
 		for (String a : assetManager.getAssetNames())
 			Gdx.app.debug(TAG, "asset: " + a);
+		
+		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+		
+		//enable texture filtering for pixel smoothing
+		for(Texture t : atlas.getTextures())
+		{
+			t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		}
+		
+		//create game resource objects
+		bunny = new AssetBunny(atlas);
+		rock = new AssetRock(atlas);
+		goldCoin = new AssetGoldCoin(atlas);
+		feather = new AssetFeather(atlas);
+		levelDecoration = new AssetLevelDecoration(atlas);
 	}
-	
-	TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-	
-	//enable texture filtering for pixel smoothing
-	for(Texture t : atlas.getTextures())
-	{
-		t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-	}
-	
-	//create game resource objects
-	bunny = new AssetBunny(atlas);
-	rock = new AssetRock(atlas);
-	goldCoin = new AssetGoldCoin(atlas);
-	feather = new AssetFeather(atlas);
-	levelDecoration = new AssetLevelDecoration(atlas);
 	
 	@Override
 	public void dispose()
