@@ -11,6 +11,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class Assets implements Disposable, AssetErrorListener
 {
