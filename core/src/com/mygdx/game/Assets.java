@@ -98,6 +98,56 @@ public class Assets implements Disposable, AssetErrorListener
 			waterOverlay = atlas.findRegion("water_overlay");
 		}
 	}
+	
+	public class AssetBunny
+	{
+		//The actual asset to be used for this object
+		public final AtlasRegion head;
+		
+		//Create the object and give it's sprite the proper image
+		public AssetBunny(TextureAtlas atlas)
+		{
+			head = atlas.findRegion("bunny_head");
+		}
+	}
+	
+	public class AssetRock
+	{
+		//The two different types of rocks are edges and the middle
+		public final AtlasRegion edge;
+		public final AtlasRegion middle;
+		
+		//Create the object and give it's sprites their proper image
+		public AssetRock (TextureAtlas atlas)
+		{
+			edge = atlas.findRegion("rock_edge");
+			middle = atlas.findRegion("rock_middle");
+		}
+	}
+	
+	public class AssetGoldCoin
+	{
+		//The actual asset to be used for this object
+		public final AtlasRegion goldCoin;
+		
+		//Create the object and give it's sprite the proper image
+		public AssetGoldCoin(TextureAtlas atlas)
+		{
+			goldCoin = atlas.findRegion("item_gold_coin");
+		}
+	}
+	
+	public class AssetFeather
+	{
+		//The actual asset to be used for this object
+		public final AtlasRegion feather;
+		
+		//Create the object and give it's sprite the proper image
+		public AssetFeather(TextureAtlas atlas)
+		{
+			feather = atlas.findRegion("item_feather");
+		}
+	}
 }
 
 
