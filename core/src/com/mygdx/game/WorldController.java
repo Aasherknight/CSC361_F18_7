@@ -49,7 +49,7 @@ public class WorldController extends InputAdapter
 			//define sprite size to be 1m x 1m in game world
 			spr.setSize(1, 1);
 			//Set origin to sprite's center
-			spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0/f);
+			spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
 			//Calculate random positions for sprite
 			float randomX = MathUtils.random(-2.0f, 2.0f);
 			float randomY = MathUtils.random(-2.0f, 2.0f);
