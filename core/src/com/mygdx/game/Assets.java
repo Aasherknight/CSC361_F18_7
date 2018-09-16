@@ -46,7 +46,7 @@ public class Assets implements Disposable, AssetErrorListener
 		for (String a : assetManager.getAssetNames())
 			Gdx.app.debug(TAG, "asset: " + a);
 		
-		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+		TextureAtlas atlas = new TextureAtlas(Constants.TEXTURE_ATLAS_OBJECTS);
 		
 		//enable texture filtering for pixel smoothing
 		for(Texture t : atlas.getTextures())
