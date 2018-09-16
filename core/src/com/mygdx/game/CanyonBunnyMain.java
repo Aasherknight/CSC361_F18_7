@@ -46,6 +46,7 @@ public class CanyonBunnyMain implements ApplicationListener
 	}
 
 	public void resume() {
+		Assets.instance.init(new AssetManager());
 		paused = false;
 	}
 
