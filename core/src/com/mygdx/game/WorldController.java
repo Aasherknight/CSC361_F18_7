@@ -20,7 +20,6 @@ public class WorldController extends InputAdapter
 	public Sprite[] testSprites;
 	public int selectedSprite;
 	public CameraHelper cameraHelper;
-
 	
 	public WorldController()
 	{

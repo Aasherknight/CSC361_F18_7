@@ -9,7 +9,7 @@ public class CanyonBunnyMain implements ApplicationListener
 {
 	private final static String TAG = CanyonBunnyMain.class.getName();
 	private WorldController worldController;
-	private com.mygdx.game.WorldRenderer worldRenderer;
+	private WorldRenderer worldRenderer;
 	private boolean paused;
 	
 	@Override
