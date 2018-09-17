@@ -15,7 +15,7 @@ public class Constants
 	 public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
 
 	//Location of description file for the texture atlas
-	public static final String TEXTURE_ATLAS_OBJECTS =  "..\\core\\assets\\canyonbunny.pack.atlas";
+	public static final String TEXTURE_ATLAS_OBJECTS =  "../core/assets/canyonbunny.atlas";
 	
 	public static final String LEVEL_01 = "levels/level-01.png";
 	
