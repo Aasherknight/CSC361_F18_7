@@ -152,11 +152,11 @@ public class Level
 		for(Rock rock : rocks)
 			rock.render(batch);	
 		
-		//draw Water overlay
-		waterOverlay.render(batch);
-
 		//draw clouds
 		clouds.render(batch);
+		
+		//draw Water overlay
+		waterOverlay.render(batch);
 	}
 	
 }
