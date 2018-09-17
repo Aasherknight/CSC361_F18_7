@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
 public class Level 
 {
@@ -137,7 +138,18 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
+		//Draw mountains
+		mountains.render(batch);
 		
+		//Draw rocks
+		for(Rock rock : rocks)
+			rock.render(batch);	
+		
+		//draw Water overlay
+		waterOverlay.render(batch);
+		
+		//draw clouds
+		clouds.render(batch);
 	}
 	
 }
