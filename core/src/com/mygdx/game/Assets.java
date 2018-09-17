@@ -8,12 +8,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets implements Disposable, AssetErrorListener
 {
@@ -26,11 +28,36 @@ public class Assets implements Disposable, AssetErrorListener
 	//singleton: prevent instantiation from other classes
 	private Assets() {}
 	
-	public AssetBunny bunny;
-	public AssetRock rock;
-	public AssetGoldCoin goldCoin;
-	public AssetFeather feather;
-	public AssetLevelDecoration levelDecoration;
+	 public AssetBunny bunny;
+	 public AssetRock rock;
+	 public AssetGoldCoin goldCoin;
+	 public AssetFeather feather;
+	 public AssetLevelDecoration levelDecoration;
+	 public AssetFonts fonts;
+	 public class AssetFonts {
+	 public final BitmapFont defaultSmall;
+	 public final BitmapFont defaultNormal;
+	 public final BitmapFont defaultBig;
+	 
+	 public AssetFonts () {
+		 // create three fonts using Libgdx's 15px bitmap font
+		 defaultSmall = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
+		 defaultNormal = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
+		 defaultBig = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
+		 // set font sizes
+		 defaultSmall.getData().setScale(0.75f);
+		 defaultNormal.getData().setScale(1.0f);
+		 defaultBig.getData().setScale(2.0f);
+		 
+		 // enable linear texture filtering for smooth fonts
+		 defaultSmall.getRegion().getTexture().setFilter(
+		 TextureFilter.Linear, TextureFilter.Linear);
+		 defaultNormal.getRegion().getTexture().setFilter(
+		 TextureFilter.Linear, TextureFilter.Linear);
+		 defaultBig.getRegion().getTexture().setFilter(
+		 TextureFilter.Linear, TextureFilter.Linear);
+		 }
+	 }
 	
 	public void init(AssetManager assetManager)
 	{
@@ -55,6 +82,7 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 		
 		//create game resource objects
+		fonts = new AssetFonts();
 		bunny = new AssetBunny(atlas);
 		rock = new AssetRock(atlas);
 		goldCoin = new AssetGoldCoin(atlas);
@@ -66,6 +94,9 @@ public class Assets implements Disposable, AssetErrorListener
 	public void dispose()
 	{
 		assetManager.dispose();
+		fonts.defaultSmall.dispose();
+		fonts.defaultNormal.dispose();
+		fonts.defaultBig.dispose();
 	}
 	
 	//Removed @Override due to no error method with these parameter is AssetErrorListener interface
@@ -92,8 +123,8 @@ public class Assets implements Disposable, AssetErrorListener
 		public AssetLevelDecoration(TextureAtlas atlas)
 		{
 			cloud01 = atlas.findRegion("cloud01");
-			cloud02 = atlas.findRegion("Cloud02");
-			cloud03 = atlas.findRegion("Cloud03");
+			cloud02 = atlas.findRegion("cloud02");
+			cloud03 = atlas.findRegion("cloud03");
 			mountainLeft = atlas.findRegion("mountain_left");
 			mountainRight = atlas.findRegion("mountain_right");
 			waterOverlay = atlas.findRegion("water_overlay");
