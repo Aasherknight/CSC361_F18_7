@@ -134,7 +134,9 @@ public class Level
 		clouds = new Clouds(pixmap.getWidth());
 		clouds.position.set(0,2);
 		mountains = new Mountains(pixmap.getWidth());
+		mountains.position.set(-1,-1);
 		waterOverlay = new WaterOverlay(pixmap.getWidth());
+		waterOverlay.position.set(0,-3.75f);
 		
 		//free memory
 		pixmap.dispose();
@@ -142,19 +144,19 @@ public class Level
 	}
 	
 	public void render(SpriteBatch batch)
-	{
-		//draw Water overlay
-		waterOverlay.render(batch);
-		
+	{		
 		//Draw mountains
 		mountains.render(batch);
-		
-		//draw clouds
-		clouds.render(batch);
-		
+
 		//Draw rocks
 		for(Rock rock : rocks)
 			rock.render(batch);	
+		
+		//draw Water overlay
+		waterOverlay.render(batch);
+
+		//draw clouds
+		clouds.render(batch);
 	}
 	
 }
