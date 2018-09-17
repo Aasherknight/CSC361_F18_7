@@ -37,7 +37,8 @@ public class Assets implements Disposable, AssetErrorListener
 	 public final BitmapFont defaultSmall;
 	 public final BitmapFont defaultNormal;
 	 public final BitmapFont defaultBig;
-	 public AssetFonts () {
+	 public AssetFonts () 
+	 {
 		 // create three fonts using Libgdx's 15px bitmap font
 		 defaultSmall = new BitmapFont(
 		 Gdx.files.internal("images/arial-15.fnt"), true);
@@ -123,8 +124,8 @@ public class Assets implements Disposable, AssetErrorListener
 		public AssetLevelDecoration(TextureAtlas atlas)
 		{
 			cloud01 = atlas.findRegion("cloud01");
-			cloud02 = atlas.findRegion("Cloud02");
-			cloud03 = atlas.findRegion("Cloud03");
+			cloud02 = atlas.findRegion("cloud02");
+			cloud03 = atlas.findRegion("cloud03");
 			mountainLeft = atlas.findRegion("mountain_left");
 			mountainRight = atlas.findRegion("mountain_right");
 			waterOverlay = atlas.findRegion("water_overlay");

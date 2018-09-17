@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.objects.AbstractGameObject;
 import com.mygdx.game.objects.Clouds;
 import com.mygdx.game.objects.Mountains;
 import com.mygdx.game.objects.Rock;
+import com.mygdx.game.objects.WaterOverlay;
 
 public class Level 
 {

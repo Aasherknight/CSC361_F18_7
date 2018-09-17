@@ -3,7 +3,7 @@ package com.mygdx.game.util;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.AbstractGameObject;
+import com.mygdx.game.objects.AbstractGameObject;
 
 public class CameraHelper 
 {
