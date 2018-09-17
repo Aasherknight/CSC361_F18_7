@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.objects.Clouds;
+import com.mygdx.game.objects.Mountains;
+import com.mygdx.game.objects.Rock;
 
 public class Level 
 {
@@ -38,7 +41,7 @@ public class Level
 	//objects
 	public Array<Rock> rocks;
 	
-	decoration
+	//decoration
 	public Clouds clouds;
 	public Mountains mountains;
 	public WaterOverlay waterOverlay;

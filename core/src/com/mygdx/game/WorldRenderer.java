@@ -38,7 +38,6 @@ public class WorldRenderer implements Disposable
 	{
 		renderWorld(batch);
 		renderGui(batch);
-		//renderTestObjects();
 	}
 	
 	private void renderWorld(SpriteBatch batch)
@@ -108,18 +107,6 @@ public class WorldRenderer implements Disposable
 		
 		fpsFont.draw(batch, "FPS: " + fps,  x, y);
 		fpsFont.setColor(1,1,1,1);			//white
-	}
-	
-	private void renderTestObjects()
-	{
-		worldController.cameraHelper.applyTo(camera);
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		for(Sprite sprite : worldController.testSprites)
-		{
-			sprite.draw(batch);
-		}
-		batch.end();
 	}
 	
 	public void resize (int width, int height)

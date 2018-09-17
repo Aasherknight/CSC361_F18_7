@@ -17,7 +17,7 @@ public class Constants
 	//Location of description file for the texture atlas
 	public static final String TEXTURE_ATLAS_OBJECTS =  "../core/assets/canyonbunny.atlas";
 	
-	public static final String LEVEL_01 = "levels/level-01.png";
+	public static final String LEVEL_01 = "../core/assets/levels/level-01.png";
 	
 	 // Amount of extra lives at level start
 	 public static final int LIVES_START = 3;

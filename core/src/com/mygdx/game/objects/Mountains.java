@@ -3,6 +3,7 @@ package com.mygdx.game.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.game.AbstractGameObject;
 import com.mygdx.game.Assets;
 
 public class Mountains extends AbstractGameObject
@@ -48,13 +49,13 @@ public class Mountains extends AbstractGameObject
 		{
 			//mountain left
 			reg = regMountainLeft;
-			batch.draw(reg.getTexture(), origin.x+xRel, origin.y+yRel, originX, originY, dimension.x, dimension.y, scale.x, scale.y,
+			batch.draw(reg.getTexture(), origin.x+xRel, origin.y+yRel, origin.x, origin.y, dimension.x, dimension.y, scale.x, scale.y,
 					rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false	);
 			xRel+=dimension.x;
 			
 			//mountain right
 			reg = regMountainRight;
-			batch.draw(reg.getTexture(), origin.x+xRel, origin.y+yRel, originX, originY, dimension.x, dimension.y, scale.x, scale.y,
+			batch.draw(reg.getTexture(), origin.x+xRel, origin.y+yRel, origin.x, origin.y, dimension.x, dimension.y, scale.x, scale.y,
 					rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false	);
 			xRel+=dimension.x;
 		}
