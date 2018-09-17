@@ -38,6 +38,7 @@ public class Mountains extends AbstractGameObject
 		batch.setColor(tintColor, tintColor, tintColor,1);
 		float xRel = dimension.x * offsetX;
 		float yRel = dimension.y * offsetY;
+		yRel += -0.75f; //move mountains down slightly
 
 		//Mountains span the whole level
 		int mountainLength = 0;

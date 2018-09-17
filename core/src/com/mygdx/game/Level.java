@@ -136,7 +136,7 @@ public class Level
 		mountains = new Mountains(pixmap.getWidth());
 		mountains.position.set(-1,-1);
 		waterOverlay = new WaterOverlay(pixmap.getWidth());
-		waterOverlay.position.set(0,-3.75f);
+		waterOverlay.position.set(0,-3.6f); //changed y from -3.75 to -3.6 to raise water slightly
 		
 		//free memory
 		pixmap.dispose();
