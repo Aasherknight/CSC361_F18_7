@@ -1,9 +1,14 @@
+/**
+ * Andrew Stake
+ */
+
 package com.mygdx.game.objects;
 
 import java.awt.Dimension;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.AbstractGameObject;
 import com.mygdx.game.Assets;
 
 public class Rock extends AbstractGameObject
