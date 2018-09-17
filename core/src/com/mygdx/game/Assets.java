@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
@@ -37,15 +38,12 @@ public class Assets implements Disposable, AssetErrorListener
 	 public final BitmapFont defaultSmall;
 	 public final BitmapFont defaultNormal;
 	 public final BitmapFont defaultBig;
-	 public AssetFonts () 
-	 {
+	 
+	 public AssetFonts () {
 		 // create three fonts using Libgdx's 15px bitmap font
-		 defaultSmall = new BitmapFont(
-		 Gdx.files.internal("images/arial-15.fnt"), true);
-		 defaultNormal = new BitmapFont(
-		 Gdx.files.internal("images/arial-15.fnt"), true);
-		 defaultBig = new BitmapFont(
-		 Gdx.files.internal("images/arial-15.fnt"), true);
+		 defaultSmall = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
+		 defaultNormal = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
+		 defaultBig = new BitmapFont(new FileHandle("../core/assets/arial-15.fnt"), true);
 		 // set font sizes
 		 defaultSmall.getData().setScale(0.75f);
 		 defaultNormal.getData().setScale(1.0f);
@@ -84,6 +82,7 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 		
 		//create game resource objects
+		fonts = new AssetFonts();
 		bunny = new AssetBunny(atlas);
 		rock = new AssetRock(atlas);
 		goldCoin = new AssetGoldCoin(atlas);
