@@ -1,3 +1,7 @@
+/**
+ * Andrew Stake
+ * The object class for the gold coin
+ */
 package com.mygdx.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +19,9 @@ public class GoldCoin extends AbstractGameObject
 		init();
 	}
 	
+	/**
+	 * Initializes the object, setting the texture region and collision bounds
+	 */
 	private void init()
 	{
 		dimension.set(0.5f, 0.5f)
@@ -27,6 +34,9 @@ public class GoldCoin extends AbstractGameObject
 		collected = false;
 	}
 	
+	/**
+	 * Draws the coin to the screen
+	 */
 	public void render (SpriteBatch batch)
 	{
 		if(collected) return;
@@ -38,6 +48,11 @@ public class GoldCoin extends AbstractGameObject
 				reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 	}
 	
+	/**
+	 * Returns an integer value for the amount of points gained for 
+	 * picking up the coin
+	 * @return 100
+	 */
 	public int getScore()
 	{
 		return 100;
