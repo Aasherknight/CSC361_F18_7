@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
 
@@ -107,6 +108,20 @@ public class WorldRenderer implements Disposable
 		
 		fpsFont.draw(batch, "FPS: " + fps,  x, y);
 		fpsFont.setColor(1,1,1,1);			//white
+	}
+	
+	//renders a GAME OVER on the gui
+	private void renderGuiGameOverMessage(SpriteBatch batch)
+	{
+		float x = cameraGUI.viewportWidth/2;
+		float y = cameraGUI.viewportHeight/2;
+		
+		if(worldController.isGameOver())
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1,0.75f,0.25f,1);
+			fontGameOver.draw(batch, "GAME OVER", x,y,0,Align.center, false);
+		}
 	}
 	
 	public void resize (int width, int height)
