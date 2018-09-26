@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
 
@@ -60,11 +61,18 @@ public class WorldRenderer implements Disposable
 		//draw collected gold coins icon and text on top left edge
 		renderGuiScore(batch);
 		
+		//draw collected feather icon on top left edge
+		renderGuiFeatherPowerup(batch);
+		
 		//draw extra lives icon and text on top right edge
 		renderGuiExtraLive(batch);
 		
 		//draw fps text on bottom right edge
 		renderGuiFpsCounter(batch);
+		
+		//draw game over text
+		renderGuiGameOverMessage(batch);
+		
 		batch.end();
 	}
 	
@@ -107,6 +115,39 @@ public class WorldRenderer implements Disposable
 		
 		fpsFont.draw(batch, "FPS: " + fps,  x, y);
 		fpsFont.setColor(1,1,1,1);			//white
+	}
+	
+	//renders a GAME OVER on the gui
+	private void renderGuiGameOverMessage(SpriteBatch batch)
+	{
+		float x = cameraGUI.viewportWidth/2;
+		float y = cameraGUI.viewportHeight/2;
+		
+		if(worldController.isGameOver())
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1,0.75f,0.25f,1);
+			fontGameOver.draw(batch, "GAME OVER", x,y,0,Align.center, false);
+		}
+	}
+	
+	private void renderGuiFeatherPowerup(SpriteBatch batch)
+	{
+		float x = -15;
+		float y = 30;
+		float timeLeftFeatherPowerup = worldController.level.bunnyHead.timeLeftFeatherPowerup;
+		if(timeLeftFeatherPowerup > 0)
+		{
+			//Start icon fade in/out if the power up time is less than 4 seconds.
+			//The fade interval is set to 5 changes per second.
+			if(timeLeftFeatherPowerup < 4)
+				if((int)(timeLeftFeatherPowerup * 5)%2 !=0)
+					batch.setColor(1,1,1,0.5f);
+			batch.draw(Assets.instance.feather.feather, x, y, 50, 50, 100, 100, 0.35f, 0.35f, 0);
+			batch.setColor(1,1,1,1);
+			Assets.instance.fonts.defaultSmall.draw(batch, "" + (int)timeLeftFeatherPowerup, x+60, y+57);
+		}
+		
 	}
 	
 	public void resize (int width, int height)
