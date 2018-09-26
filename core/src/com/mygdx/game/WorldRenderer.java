@@ -124,6 +124,24 @@ public class WorldRenderer implements Disposable
 		}
 	}
 	
+	private void renderGuiFeatherPowerup(SpriteBatch batch)
+	{
+		float x = -15;
+		float y = 30;
+		float timeLeftFeatherPowerup = worldController.level.bunnyHead.timeLeftFeatherPowerup;
+		if(timeLeftPowerup > 0)
+		{
+			//Start icon fade in/out if the power up time is less than 4 seconds.
+			//The fade interval is set to 5 changes per second.
+			if(timeLeftPowerup < 4)
+				if((int)(timeLeftFeatherPowerup * 5)%2) !=0)
+					batch.setColor(1,1,1,0.5f);
+		}
+		batch.draw(Assets.instance.feather.feather, x, y, 50, 50, 100, 100, 0.35f, 0.35f, 0);
+		batch.setColor(1,1,1,1);
+		Assets.instance.fonts.defaultSmall.draw(batch, "" + (int)timeLeftFeatherPowerup, x+60, y+57);
+	}
+	
 	public void resize (int width, int height)
 	{
 		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height) * width;
