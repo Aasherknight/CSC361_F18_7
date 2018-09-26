@@ -14,6 +14,12 @@ import com.badlogic.gdx.InputAdapter;
 import com.mygdx.game.util.CameraHelper;
 import com.mygdx.game.objects.Rock;
 import com.mygdx.game.util.Constants;
+import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.objects.BunnyHead;
+import com.mygdx.game.objects.BunnyHead.JUMP_STATE;
+import com.mygdx.game.objects.Feather;
+import com.mygdx.game.objects.GoldCoin;
+import com.mygdx.game.objects.Rock;
 
 public class WorldController extends InputAdapter
 {
@@ -63,6 +69,7 @@ public class WorldController extends InputAdapter
 	public void update(float deltaTime)
 	{
 		handleDebugInput(deltaTime);
+		level.update(deltaTime);
 		cameraHelper.update(deltaTime);
 	}
 	
