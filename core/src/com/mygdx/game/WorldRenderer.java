@@ -71,7 +71,7 @@ public class WorldRenderer implements Disposable
 		renderGuiFpsCounter(batch);
 		
 		//draw game over text
-		rednerGuiGameOverMessage(batch);
+		renderGuiGameOverMessage(batch);
 		
 		batch.end();
 	}
@@ -136,12 +136,12 @@ public class WorldRenderer implements Disposable
 		float x = -15;
 		float y = 30;
 		float timeLeftFeatherPowerup = worldController.level.bunnyHead.timeLeftFeatherPowerup;
-		if(timeLeftPowerup > 0)
+		if(timeLeftFeatherPowerup > 0)
 		{
 			//Start icon fade in/out if the power up time is less than 4 seconds.
 			//The fade interval is set to 5 changes per second.
-			if(timeLeftPowerup < 4)
-				if((int)(timeLeftFeatherPowerup * 5)%2) !=0)
+			if(timeLeftFeatherPowerup < 4)
+				if((int)(timeLeftFeatherPowerup * 5)%2 !=0)
 					batch.setColor(1,1,1,0.5f);
 			batch.draw(Assets.instance.feather.feather, x, y, 50, 50, 100, 100, 0.35f, 0.35f, 0);
 			batch.setColor(1,1,1,1);
