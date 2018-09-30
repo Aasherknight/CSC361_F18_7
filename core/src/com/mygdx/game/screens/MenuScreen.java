@@ -96,6 +96,9 @@ public class MenuScreen extends AbstractGameScreen
 	private Table buildBackgroundLayer()
 	{
 		Table layer = new Table();
+		// + Background
+		imgBackground = new Image(skinCanyonBunny, "background");
+		layer.add(imgBackground);
 		return layer;
 	}
 	
@@ -106,6 +109,14 @@ public class MenuScreen extends AbstractGameScreen
 	private Table buildObjectsLayer()
 	{
 		Table layer = new Table();
+		// + Coins
+		imgCoins = new Image(skinCanyonBunny, "coins");
+		layer.addActor(imgCoins);
+		imgCoins.setPosition(135, 80);
+		// + Bunny
+		imgBunny = new Image(skinCanyonBunny, "bunny");
+		layer.addActor(imgBunny);
+		imgBunny.setPosition(355, 40);
 		return layer;
 	}
 	
@@ -116,6 +127,15 @@ public class MenuScreen extends AbstractGameScreen
 	private Table buildLogosLayer()
 	{
 		Table layer = new Table();
+		layer.left().top();
+		// + Game Logo
+		imgLogo = new Image(skinCanyonBunny, "logo");
+		layer.add(imgLogo);
+		layer.row().expandY();
+		// + Info Logos
+		imgLogo = new Image(skinCanyonBunny, "info");
+		layer.add(imgInfo).bottom();
+		if (debugEnabled) layer.debug();
 		return layer;
 	}
 	
@@ -126,6 +146,31 @@ public class MenuScreen extends AbstractGameScreen
 	private Table buildControlsLayer()
 	{
 		Table layer = new Table();
+		layer.right().bottom();
+		// + Play Button
+		btnMenuPlay = new Button(skinCanyonBunny, "play");
+		layer.add(btnMenuPlay);
+		btnMenuPlay.addListener(new ChangeListener() 
+		{
+			@Override
+			public void changed (ChangeEvent event, Actor actor)
+			{
+				onPlayClicked();
+			}
+		});
+		layer.row();
+		// + Options Button
+		btnMenuOptions = new Button(skinCanyonBunny, "options");
+		layer.add(btnMenuOptions);
+		btnMenuOptions.addListener(new ChangeListener() 
+		{
+			@Override
+			public void changed (ChangeEvent event, Actor actor)
+			{
+				onOptionsClicked();
+			}
+		});
+		if (debugEnabled) layer.debug();
 		return layer;
 	}
 	
@@ -139,6 +184,23 @@ public class MenuScreen extends AbstractGameScreen
 		return layer;
 	}
 	
+	/**
+	 * Called if the play button is selected.
+	 * Switches to the game screen
+	 */
+	private void onPlayClicked()
+	{
+		game.setScreen(new GameScreen(game));
+	}
+	
+	/**
+	 * Called if the options button is selected.
+	 * 
+	 */
+	private void onOptionsClicked()
+	{
+		
+	}
 	/**
 	 * Draws the menu screen and debug lines if debug is activated
 	 * @param deltaTime
