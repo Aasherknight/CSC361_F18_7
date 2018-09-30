@@ -1,12 +1,20 @@
 package com.mygdx.game;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL30;
 
+import com.badlogic.gdx.Game;
+import com.mygdx.game.Assets;
+import com.mygdx.game.MenuScreen;
 
-public class CanyonBunnyMain implements ApplicationListener
+/**
+ * @author Jeff
+ * Class for initializing the game and Managing 
+ * the game loop
+ *
+ */
+public class CanyonBunnyMain extends Game
 {
 	private final static String TAG = CanyonBunnyMain.class.getName();
 	private WorldController worldController;
@@ -19,10 +27,8 @@ public class CanyonBunnyMain implements ApplicationListener
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		 // Load assets
 		 Assets.instance.init(new AssetManager());
-		//Initialize controller and renderer
-		worldController = new WorldController();
-		worldRenderer = new WorldRenderer(worldController);
-		paused = false;
+		 //Start Game at menuscreen
+		 setScreen(new MenuScreen(this));
 		
 	}
 
