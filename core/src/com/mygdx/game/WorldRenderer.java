@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
-import com.badlogic.gdx.Game;
-import com.mygdx.game.MenuScreen;
 
 /**
  * @author Jeff
@@ -22,13 +20,7 @@ public class WorldRenderer implements Disposable
 	private OrthographicCamera cameraGUI;
 	private SpriteBatch batch;
 	private WorldController worldController;
-	private Game game;
-	 
-	private void backToMenu () {
-	 // switch to menu screen
-		game.setScreen(new MenuScreen(game));
-	 }
-	
+
 	public WorldRenderer (WorldController wc)
 	{
 		worldController = wc;

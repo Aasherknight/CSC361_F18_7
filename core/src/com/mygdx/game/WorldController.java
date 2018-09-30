@@ -20,7 +20,14 @@ import com.mygdx.game.objects.BunnyHead.JUMP_STATE;
 import com.mygdx.game.objects.Feather;
 import com.mygdx.game.objects.GoldCoin;
 import com.mygdx.game.objects.Rock;
+import com.badlogic.gdx.Game;
+import com.mygdx.game.MenuScreen;
 
+/**
+ * @author Jeff
+ * Class for managing game logic within the game loop
+ *
+ */
 public class WorldController extends InputAdapter
 {
 	private static final String TAG = WorldController.class.getName();
@@ -36,6 +43,12 @@ public class WorldController extends InputAdapter
 	private Rectangle r2 = new Rectangle();
 	
 	private float timeLeftGameOverDelay;
+	private Game game;
+	 
+	 private void backToMenu () {
+	 // switch to menu screen
+		 game.setScreen(new MenuScreen(game));
+	 }
 	
 	/**
 	 * If the bunny head has a collision with rock, this method
