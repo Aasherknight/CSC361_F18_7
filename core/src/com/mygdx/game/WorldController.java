@@ -45,117 +45,16 @@ public class WorldController extends InputAdapter
 	private float timeLeftGameOverDelay;
 	private Game game;
 	 
-	 private void backToMenu () {
-	 // switch to menu screen
-		 game.setScreen(new MenuScreen(game));
-	 }
-	
 	/**
-	 * If the bunny head has a collision with rock, this method
-	 * is used to find and set the new position for bunny head
-	 * @param rock
+	 * Aaron Gerber
+	 * Adding this because it was missing. changes from pg 234
 	 */
-	private void onCollisionBunnyHeadWithRock(Rock rock)
+	public WorldController (Game game)
 	{
-		BunnyHead bunnyHead = level.bunnyHead;
-		float heightDifference = Math.abs(bunnyHead.position.y -
-				(rock.position.y + rock.bounds.height));
-		if (heightDifference > 0.25f)
-		{
-			boolean hitRightEdge = bunnyHead.position.x > (rock.position.x +rock.bounds.width / 2.0f);
-			if (hitRightEdge)
-			{
-				bunnyHead.position.x = rock.position.x + rock.bounds.width;
-			}
-			else
-			{
-				bunnyHead.position.x = rock.position.x - bunnyHead.bounds.width;
-			}
-			return;
-		}
+		this.game = game;
+		init();
+	}
 		
-		switch (bunnyHead.jumpState) {
-		case GROUNDED:
-			break;
-		case FALLING:
-		case JUMP_FALLING:
-			bunnyHead.position.y = rock.position.y + bunnyHead.bounds.height + bunnyHead.origin.y;
-			bunnyHead.jumpState = JUMP_STATE.GROUNDED;
-			break;
-		case JUMP_RISING:
-			bunnyHead.position.y = rock.position.y + bunnyHead.bounds.height + bunnyHead.origin.y;
-			break;
-		}
-	}
-	
-	/**
-	 * When the bunny head has a collision with a gold coin, this method
-	 * handles the collection logic
-	 * @param goldcoin
-	 */
-	private void onCollisionBunnyWithGoldCoin(GoldCoin goldcoin)
-	{
-		goldcoin.collected = true;
-		score += goldcoin.getScore();
-		Gdx.app.log(TAG, "Gold coin collected");
-	}
-	
-	/**
-	 * When the bunny head has a collision with a feather, this method
-	 * activates the feather power up
-	 * @param feather
-	 */
-	private void onCollisionBunnyWithFeather(Feather feather)
-	{
-		feather.collected = true;
-		score += feather.getScore();
-		level.bunnyHead.setFeatherPowerup(true);
-		Gdx.app.log(TAG, "Feather collected");
-	}
-	
-	private void testCollisions()
-	{
-		r1.set(level.bunnyHead.position.x, level.bunnyHead.position.y, 
-				level.bunnyHead.bounds.width, level.bunnyHead.bounds.height);
-		
-		//Test collision: Bunny Head <-> Rocks
-		for(Rock rock : level.rocks)
-		{
-			r2.set(rock.position.x, rock.position.y, rock.bounds.width, rock.bounds.height);
-			if(!r1.overlaps(r2)) continue;
-			onCollisionBunnyHeadWithRock(rock);
-			//IMPORTANT: must do all collisions for valid
-			//edge testing on rocks.
-		}
-		
-		//Test collision: Bunny Head <-> Gold Coins
-		for(GoldCoin goldcoin : level.goldcoins)
-		{
-			if (goldcoin.collected) continue;
-			r2.set(goldcoin.position.x, goldcoin.position.y, goldcoin.bounds.width, goldcoin.bounds.height);
-			if(!r1.overlaps(r2)) continue;
-			onCollisionBunnyWithGoldCoin(goldcoin);
-			break;
-		}
-		
-		//Test collision: Bunny Head <-> Feathers
-		for(Feather feather : level.feathers)
-		{
-			if (feather.collected) continue;
-			r2.set(feather.position.x, feather.position.y, feather.bounds.width, feather.bounds.height);
-			if (!r1.overlaps(r2)) continue;
-			onCollisionBunnyWithFeather(feather);
-			break;
-		}
-	}
-	
-	public void initLevel()
-	{
-		score = 0;
-		level = new Level(Constants.LEVEL_01);
-		cameraHelper.setTarget(level.bunnyHead);
-	}
-	
 	public WorldController()
 	{
 		init();
@@ -192,10 +91,12 @@ public class WorldController extends InputAdapter
 		if (isGameOver())
 		{
 			timeLeftGameOverDelay -= deltaTime;
+			/**
+			 * Aaron Gerber
+			 * Adding this because it was missing. changes from pg 234
+			 */
 			if (timeLeftGameOverDelay < 0)
-			{
-				init();
-			}
+				backToMenu();
 		}
 		else
 		{
@@ -272,6 +173,13 @@ public class WorldController extends InputAdapter
 			cameraHelper.setTarget(cameraHelper.hasTarget() ? null: level.bunnyHead);
 			Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasTarget());
 		}
+		/**
+		 * Aaron Gerber
+		 * Adding this because it was missing. changes from pg 234
+		 * back to menu
+		 */
+		else if (keycode == Keys.ESCAPE || keycode == Keys.BACK)
+			backToMenu();
 		return false;
 	}
 	
@@ -331,6 +239,117 @@ public class WorldController extends InputAdapter
 	{
 		return level.bunnyHead.position.y < -5;
 	}
+	
+	private void backToMenu () {
+		 // switch to menu screen
+			 game.setScreen(new MenuScreen(game));
+		 }
+		
+		/**
+		 * If the bunny head has a collision with rock, this method
+		 * is used to find and set the new position for bunny head
+		 * @param rock
+		 */
+		private void onCollisionBunnyHeadWithRock(Rock rock)
+		{
+			BunnyHead bunnyHead = level.bunnyHead;
+			float heightDifference = Math.abs(bunnyHead.position.y -
+					(rock.position.y + rock.bounds.height));
+			if (heightDifference > 0.25f)
+			{
+				boolean hitRightEdge = bunnyHead.position.x > (rock.position.x +rock.bounds.width / 2.0f);
+				if (hitRightEdge)
+				{
+					bunnyHead.position.x = rock.position.x + rock.bounds.width;
+				}
+				else
+				{
+					bunnyHead.position.x = rock.position.x - bunnyHead.bounds.width;
+				}
+				return;
+			}
+			
+			switch (bunnyHead.jumpState) {
+			case GROUNDED:
+				break;
+			case FALLING:
+			case JUMP_FALLING:
+				bunnyHead.position.y = rock.position.y + bunnyHead.bounds.height + bunnyHead.origin.y;
+				bunnyHead.jumpState = JUMP_STATE.GROUNDED;
+				break;
+			case JUMP_RISING:
+				bunnyHead.position.y = rock.position.y + bunnyHead.bounds.height + bunnyHead.origin.y;
+				break;
+			}
+		}
+		
+		/**
+		 * When the bunny head has a collision with a gold coin, this method
+		 * handles the collection logic
+		 * @param goldcoin
+		 */
+		private void onCollisionBunnyWithGoldCoin(GoldCoin goldcoin)
+		{
+			goldcoin.collected = true;
+			score += goldcoin.getScore();
+			Gdx.app.log(TAG, "Gold coin collected");
+		}
+		
+		/**
+		 * When the bunny head has a collision with a feather, this method
+		 * activates the feather power up
+		 * @param feather
+		 */
+		private void onCollisionBunnyWithFeather(Feather feather)
+		{
+			feather.collected = true;
+			score += feather.getScore();
+			level.bunnyHead.setFeatherPowerup(true);
+			Gdx.app.log(TAG, "Feather collected");
+		}
+		
+		private void testCollisions()
+		{
+			r1.set(level.bunnyHead.position.x, level.bunnyHead.position.y, 
+					level.bunnyHead.bounds.width, level.bunnyHead.bounds.height);
+			
+			//Test collision: Bunny Head <-> Rocks
+			for(Rock rock : level.rocks)
+			{
+				r2.set(rock.position.x, rock.position.y, rock.bounds.width, rock.bounds.height);
+				if(!r1.overlaps(r2)) continue;
+				onCollisionBunnyHeadWithRock(rock);
+				//IMPORTANT: must do all collisions for valid
+				//edge testing on rocks.
+			}
+			
+			//Test collision: Bunny Head <-> Gold Coins
+			for(GoldCoin goldcoin : level.goldcoins)
+			{
+				if (goldcoin.collected) continue;
+				r2.set(goldcoin.position.x, goldcoin.position.y, goldcoin.bounds.width, goldcoin.bounds.height);
+				if(!r1.overlaps(r2)) continue;
+				onCollisionBunnyWithGoldCoin(goldcoin);
+				break;
+			}
+			
+			//Test collision: Bunny Head <-> Feathers
+			for(Feather feather : level.feathers)
+			{
+				if (feather.collected) continue;
+				r2.set(feather.position.x, feather.position.y, feather.bounds.width, feather.bounds.height);
+				if (!r1.overlaps(r2)) continue;
+				onCollisionBunnyWithFeather(feather);
+				break;
+			}
+		}
+		
+		public void initLevel()
+		{
+			score = 0;
+			level = new Level(Constants.LEVEL_01);
+			cameraHelper.setTarget(level.bunnyHead);
+		}
 }
 
 
