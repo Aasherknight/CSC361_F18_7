@@ -153,6 +153,41 @@ public class MenuScreen extends AbstractGameScreen
 	private Table buildControlsLayer()
 	{
 		Table layer = new Table();
+		/**
+		 * Aaron Gerber - pg 247-248 changes
+		 */
+		//Set the layer to the bottom right
+		layer.right().bottom();
+		// add play button
+		btnMenuPlay = new Button(skinCanyonBunny, "play");
+		layer.add(btnMenuPlay);
+		//give the play button something to do
+		btnMenuPlay.addListener(new ChangeListener()
+			{
+				@Override
+				public void changed(ChangeEvent event, Actor actor)
+					{onPlayClicked();}
+			});
+		
+		layer.row();
+		//add options button
+		btnMenuOptions = new Button(skinCanyonBunny, "options");
+		layer.add(btnMenuOptions);
+		//give the options button something to do
+		btnMenuOptions.addListener(new ChangeListener()
+			{
+				@Override
+				public void changed(ChangeEvent event, Actor actor)
+					{onOptionsClicked();}
+			});
+		
+		//show debug layer if we are on debug
+		if(debugEnabled) 
+			layer.debug();
+		/**
+		 * End of changes from pg 247-248
+		 */
+		
 		return layer;
 	}
 	
@@ -423,6 +458,15 @@ public class MenuScreen extends AbstractGameScreen
 		btnMenuPlay.setVisible(true);
 		btnMenuOptions.setVisible(true);
 		winOptions.setVisible(false);
+	}
+	
+	/**
+	 * Aaron Gerber
+	 * play the game!
+	 */
+	private void onPlayClicked()
+	{
+		game.setScreen(new GameScreen(game));
 	}
 	
 	private void onOptionsClicked()
