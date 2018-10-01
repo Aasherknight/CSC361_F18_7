@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL30;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.Assets;
-import com.mygdx.game.MenuScreen;
+import com.mygdx.game.screens.MenuScreen;
 
 /**
  * @author Jeff

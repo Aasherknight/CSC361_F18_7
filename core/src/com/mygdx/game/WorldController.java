@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.game.util.CameraHelper;
 import com.mygdx.game.objects.Rock;
+import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.util.Constants;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.objects.BunnyHead;
@@ -21,7 +22,6 @@ import com.mygdx.game.objects.Feather;
 import com.mygdx.game.objects.GoldCoin;
 import com.mygdx.game.objects.Rock;
 import com.badlogic.gdx.Game;
-import com.mygdx.game.MenuScreen;
 
 /**
  * @author Jeff

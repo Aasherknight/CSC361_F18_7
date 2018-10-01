@@ -259,7 +259,7 @@ public class MenuScreen extends AbstractGameScreen
 		tbl.columnDefaults(0).padRight(10);
 		tbl.columnDefaults(1).padRight(10);
 		// + Checkbox, "Show FPS Counter" label
-		chkShowFpsCounter = new Checkbox("", skinLibgdx);
+		chkShowFpsCounter = new CheckBox("", skinLibgdx);
 		tbl.add(new Label("Show FPS Counter", skinLibgdx));
 		tbl.add(chkShowFpsCounter);
 		tbl.row();
