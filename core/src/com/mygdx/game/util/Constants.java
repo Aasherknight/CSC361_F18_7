@@ -27,4 +27,28 @@ public class Constants
 	 
 	 //Delay after game over
 	 public static final float TIME_DELAY_GAME_OVER = 3;
+	 
+	 /**
+	  * Aaron Gerber
+	  * location of atlas for the ui textures
+	  */
+	 public static final String TEXTURE_ATLAS_UI = "../core/assets/canyonbunny-ui.atlas";
+	 
+	 /**
+	  * Aaron Gerber
+	  * location of atlas for the libgdx ui textures
+	  */
+	 public static final String TEXTURE_ATLAS_LIBGDX_UI = "../core/assets/uiskin.atlas";
+	 
+	 /**
+	  * Aaron Gerber
+	  * location of json for the libgdx ui textures
+	  */
+	 public static final String SKIN_LIBGDX_UI = "../core/assets/uiskin.json";
+	 
+	 /**
+	  * Aaron Gerber
+	  * location of json for the canyonbunny ui textures
+	  */
+	 public static final String SKIN_CANYONBUNNY_UI = "../core/assets/canyonbunny-ui.json";
 }
