@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
-import com.mygdx.util.GamePreferences;
+import com.mygdx.game.util.GamePreferences;
 
 /**
  * @author Jeff

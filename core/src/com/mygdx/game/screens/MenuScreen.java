@@ -425,7 +425,7 @@ public class MenuScreen extends AbstractGameScreen
 		prefs.volSound = sldSound.getValue();
 		prefs.music = chkMusic.isChecked();
 		prefs.volMusic = sldMusic.getValue();
-		prefs.charSkin - selCharSkin.getSelectedIndex();
+		prefs.charSkin = selCharSkin.getSelectedIndex();
 		prefs.showFpsCounter = chkShowFpsCounter.isChecked();
 		prefs.save();
 	}

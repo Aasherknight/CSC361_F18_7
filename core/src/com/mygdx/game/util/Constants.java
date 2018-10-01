@@ -51,4 +51,10 @@ public class Constants
 	  * location of json for the canyonbunny ui textures
 	  */
 	 public static final String SKIN_CANYONBUNNY_UI = "../core/assets/canyonbunny-ui.json";
+
+	 /**
+	  * Aaron Gerber
+	  * looked throughout the chapter, this doesn't exist?
+	  */
+	 public static final String PREFERENCES = null;
 }
