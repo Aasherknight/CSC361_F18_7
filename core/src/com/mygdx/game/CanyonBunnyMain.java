@@ -32,10 +32,12 @@ public class CanyonBunnyMain extends Game
 		
 	}
 
+	@Override
 	public void resize(int width, int height) {
-		worldRenderer.resize(width,height);
+		worldRenderer.resize(width, height);
 	}
 
+	@Override
 	public void render() {
 		if(!paused)
 		{
