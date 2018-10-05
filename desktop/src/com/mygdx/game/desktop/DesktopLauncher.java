@@ -8,7 +8,7 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 
 public class DesktopLauncher 
 {
-	private static boolean rebuildAtlas = true;
+	private static boolean rebuildAtlas = false;
 	private static boolean drawDebugOutline = false;
 	
 	public static void main (String[] arg) 
@@ -21,6 +21,11 @@ public class DesktopLauncher
 			 settings.duplicatePadding = false;
 			 settings.debug = drawDebugOutline;
 			 TexturePacker.process(settings, "assets-raw/images","../core/assets","canyonbunny.atlas");
+			 /**
+			  * Aaron Gerber
+			  * Adds the atlas for the UI images on the title screen of the game.
+			  */
+			 TexturePacker.process(settings, "assets-raw/images-ui","../core/assets","canyonbunny-ui.atlas");
 		 }
 	 		LwjglApplicationConfiguration cfg = new
 	 		LwjglApplicationConfiguration();
