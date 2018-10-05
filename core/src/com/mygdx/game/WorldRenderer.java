@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
@@ -83,6 +84,11 @@ public class WorldRenderer implements Disposable
 		batch.end();
 	}
 	
+	/**
+	 * draws the extra lives in the top right corner
+	 * handles animation for livesVisual
+	 * @param batch
+	 */
 	private void renderGuiExtraLive(SpriteBatch batch)
 	{
 		float x = cameraGUI.viewportWidth-50-Constants.LIVES_START * 50;
@@ -106,10 +112,23 @@ public class WorldRenderer implements Disposable
 		}
 	}
 	
+	/**
+	 * Draws the score and handles the counting up animation
+	 * @param batch
+	 */
 	private void renderGuiScore(SpriteBatch batch)
 	{
 		float x = -15;
 		float y = -15;
+		float offsetX = 50;
+		float offsetY = 50;
+		if(worldController.scoreVisual < worldController.score)
+		{
+			long shakeAlpha = System.currentTimeMillis() % 360;
+			float shakeDist = 1.5f;
+			offsetX += MathUtils.sinDeg(shakeAlpha * 2.2f) * shakeDist;
+			offsetY += MathUtils.sinDeg(shakeAlpha * 2.9f) * shakeDist;
+		}		
 		batch.draw(Assets.instance.goldCoin.goldCoin, x, y, 50, 50, 100, 100, 0.35f, -0.35f, 0);
 		Assets.instance.fonts.defaultBig.draw(batch,"" + worldController.score, x+75, y+37);
 	}
