@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Assets;
 import com.mygdx.game.util.Constants;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 
 public class BunnyHead extends AbstractGameObject {
 	 public static final String TAG = BunnyHead.class.getName();
@@ -19,6 +20,7 @@ public class BunnyHead extends AbstractGameObject {
 	 public JUMP_STATE jumpState;
 	 public boolean hasFeatherPowerup;
 	 public float timeLeftFeatherPowerup;
+	 public ParticleEffect dustParticles = new ParticleEffect();
 	 
 	 public BunnyHead () 
 	 {
@@ -43,6 +45,9 @@ public class BunnyHead extends AbstractGameObject {
 		 // Power-ups
 		 hasFeatherPowerup = false;
 		 timeLeftFeatherPowerup = 0;
+		// Particles
+		 dustParticles.load(Gdx.files.internal("particles/dust.pfx"),
+		 Gdx.files.internal("particles"));
 	 };
 	 public void setJumping (boolean jumpKeyPressed) {
 			 switch (jumpState) {
@@ -95,6 +100,7 @@ public class BunnyHead extends AbstractGameObject {
 				 setFeatherPowerup(false);
 			 }
 		 }
+		 dustParticles.update(deltaTime);
 	 }
 	 @Override
 	 protected void updateMotionY (float deltaTime) 
@@ -124,12 +130,17 @@ public class BunnyHead extends AbstractGameObject {
 		 		}
 		 }
 		 if (jumpState != JUMP_STATE.GROUNDED)
+		 {
+			 dustParticles.allowCompletion();
 			 super.updateMotionY(deltaTime);
+		 }
 	 }
 	 @Override
 	 public void render (SpriteBatch batch) {
 		 TextureRegion reg = null;
 		 // Set special color when game object has a feather power-up
+		// Draw Particles
+		 dustParticles.draw(batch);
 		 if (hasFeatherPowerup) {
 			 batch.setColor(1.0f, 0.8f, 0.0f, 1.0f);
 		 }
