@@ -16,7 +16,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
+/**
+ * @author Jeff
+ * Class for managing the various game assets and handing them as objects
+ * to the appropriate classes
+ *
+ */
 public class Assets implements Disposable, AssetErrorListener
 {
 	public static final String TAG = Assets.class.getName();
@@ -24,6 +32,42 @@ public class Assets implements Disposable, AssetErrorListener
 	public static final Assets instance = new Assets();
 	
 	private AssetManager assetManager;
+	
+	public AssetSounds sounds;
+	public AssetMusic music;
+	
+	/**
+	 * @author Jeff
+	 * Class to manage all ingame sounds
+	 */
+	public class AssetSounds 
+	{
+		 public final Sound jump;
+		 public final Sound jumpWithFeather;
+		 public final Sound pickupCoin;
+		 public final Sound pickupFeather;
+		 public final Sound liveLost;
+		 public AssetSounds (AssetManager am) 
+		 {
+			 jump = am.get("sounds/jump.wav", Sound.class);
+			 jumpWithFeather = am.get("sounds/jump_with_feather.wav",Sound.class);
+			 pickupCoin = am.get("sounds/pickup_coin.wav", Sound.class);
+			 pickupFeather = am.get("sounds/pickup_feather.wav",Sound.class);
+			 liveLost = am.get("sounds/live_lost.wav", Sound.class);
+		 }
+	}
+	/**
+	 * @author Jeff
+	 * Class to manage all in-game music files
+	 */
+	public class AssetMusic 
+	{
+		public final Music song01;
+		public AssetMusic (AssetManager am) 
+		{
+			song01 = am.get("music/keith303_-_brand_new_highscore.mp3",Music.class);
+		}
+	}
 	
 	//singleton: prevent instantiation from other classes
 	private Assets() {}
@@ -74,6 +118,14 @@ public class Assets implements Disposable, AssetErrorListener
 			Gdx.app.debug(TAG, "asset: " + a);
 		
 		TextureAtlas atlas = new TextureAtlas(Constants.TEXTURE_ATLAS_OBJECTS);
+		// load sounds
+		 assetManager.load("sounds/jump.wav", Sound.class);
+		 assetManager.load("sounds/jump_with_feather.wav", Sound.class);
+		 assetManager.load("sounds/pickup_coin.wav", Sound.class);
+		 assetManager.load("sounds/pickup_feather.wav", Sound.class);
+		 assetManager.load("sounds/live_lost.wav", Sound.class);
+		 // load music
+		 assetManager.load("music/keith303_-_brand_new_highscore.mp3",Music.class);
 		
 		//enable texture filtering for pixel smoothing
 		for(Texture t : atlas.getTextures())
@@ -88,6 +140,8 @@ public class Assets implements Disposable, AssetErrorListener
 		goldCoin = new AssetGoldCoin(atlas);
 		feather = new AssetFeather(atlas);
 		levelDecoration = new AssetLevelDecoration(atlas);
+		sounds = new AssetSounds(assetManager);
+		music = new AssetMusic(assetManager);
 	}
 	
 	@Override
