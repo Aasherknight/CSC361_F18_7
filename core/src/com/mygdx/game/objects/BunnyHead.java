@@ -46,8 +46,8 @@ public class BunnyHead extends AbstractGameObject {
 		 hasFeatherPowerup = false;
 		 timeLeftFeatherPowerup = 0;
 		// Particles
-		 dustParticles.load(Gdx.files.internal("particles/dust.pfx"),
-		 Gdx.files.internal("particles"));
+		 dustParticles.load(Gdx.files.internal("../core/assets/particles/dust.pfx"),
+		 Gdx.files.internal("../core/assets/particles"));
 	 };
 	 public void setJumping (boolean jumpKeyPressed) {
 			 switch (jumpState) {

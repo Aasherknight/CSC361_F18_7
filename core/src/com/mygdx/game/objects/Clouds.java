@@ -109,7 +109,7 @@ public class Clouds extends AbstractGameObject
 	@Override
 	public void update(float deltaTime)
 	{
-		for (int i = clouds.size - 1; i >= 0; i++)
+		for (int i = clouds.size - 1; i >= 0; i--)
 		{
 			Cloud cloud = clouds.get(i);
 			cloud.update(deltaTime);
