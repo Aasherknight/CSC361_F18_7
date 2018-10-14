@@ -49,11 +49,11 @@ public class Assets implements Disposable, AssetErrorListener
 		 public final Sound liveLost;
 		 public AssetSounds (AssetManager am) 
 		 {
-			 jump = am.get("sounds/jump.wav", Sound.class);
-			 jumpWithFeather = am.get("sounds/jump_with_feather.wav",Sound.class);
-			 pickupCoin = am.get("sounds/pickup_coin.wav", Sound.class);
-			 pickupFeather = am.get("sounds/pickup_feather.wav",Sound.class);
-			 liveLost = am.get("sounds/live_lost.wav", Sound.class);
+			 jump = am.get("../core/assets/sounds/jump.wav", Sound.class);
+			 jumpWithFeather = am.get("../core/assets/sounds/jump_with_feather.wav",Sound.class);
+			 pickupCoin = am.get("../core/assets/sounds/pickup_coin.wav", Sound.class);
+			 pickupFeather = am.get("../core/assets/sounds/pickup_feather.wav",Sound.class);
+			 liveLost = am.get("../core/assets/sounds/live_lost.wav", Sound.class);
 		 }
 	}
 	/**
@@ -65,7 +65,7 @@ public class Assets implements Disposable, AssetErrorListener
 		public final Music song01;
 		public AssetMusic (AssetManager am) 
 		{
-			song01 = am.get("music/keith303_-_brand_new_highscore.mp3",Music.class);
+			song01 = am.get("../core/assets/music/keith303_-_brand_new_highscore.mp3",Music.class);
 		}
 	}
 	
@@ -119,13 +119,16 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		TextureAtlas atlas = new TextureAtlas(Constants.TEXTURE_ATLAS_OBJECTS);
 		// load sounds
-		 assetManager.load("sounds/jump.wav", Sound.class);
-		 assetManager.load("sounds/jump_with_feather.wav", Sound.class);
-		 assetManager.load("sounds/pickup_coin.wav", Sound.class);
-		 assetManager.load("sounds/pickup_feather.wav", Sound.class);
-		 assetManager.load("sounds/live_lost.wav", Sound.class);
-		 // load music
-		 assetManager.load("music/keith303_-_brand_new_highscore.mp3",Music.class);
+		assetManager.load("../core/assets/sounds/jump.wav", Sound.class);
+		assetManager.load("../core/assets/sounds/jump_with_feather.wav", Sound.class);
+		assetManager.load("../core/assets/sounds/pickup_coin.wav", Sound.class);
+		assetManager.load("../core/assets/sounds/pickup_feather.wav", Sound.class);
+		assetManager.load("../core/assets/sounds/live_lost.wav", Sound.class);
+		// load music
+		assetManager.load("../core/assets/music/keith303_-_brand_new_highscore.mp3",Music.class);
+		
+		//finish loading audio assets
+		assetManager.finishLoading();
 		
 		//enable texture filtering for pixel smoothing
 		for(Texture t : atlas.getTextures())
