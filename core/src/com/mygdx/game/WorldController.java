@@ -22,6 +22,7 @@ import com.mygdx.game.objects.Feather;
 import com.mygdx.game.objects.GoldCoin;
 import com.mygdx.game.objects.Rock;
 import com.badlogic.gdx.Game;
+import com.mygdx.game.util.AudioManager;
 
 /**
  * @author Jeff
@@ -97,6 +98,7 @@ public class WorldController extends InputAdapter
 		handleDebugInput(deltaTime);
 		if (isGameOver())
 		{
+			AudioManager.instance.play(Assets.instance.sounds.liveLost);
 			timeLeftGameOverDelay -= deltaTime;
 			/**
 			 * Aaron Gerber
