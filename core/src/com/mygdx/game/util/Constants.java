@@ -56,5 +56,5 @@ public class Constants
 	  * Aaron Gerber
 	  * looked throughout the chapter, this doesn't exist?
 	  */
-	 public static final String PREFERENCES = "../core/assets/preferences.txt";
+	 public static final String PREFERENCES = "preferences";
 }
