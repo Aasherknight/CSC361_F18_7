@@ -23,6 +23,14 @@ import com.mygdx.game.objects.GoldCoin;
 import com.mygdx.game.objects.Rock;
 import com.badlogic.gdx.Game;
 import com.mygdx.game.util.AudioManager;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.objects.Carrot;
 
 /**
  * @author Jeff
@@ -51,6 +59,9 @@ public class WorldController extends InputAdapter
 	
 	private float timeLeftGameOverDelay;
 	private Game game;
+	
+	private boolean goalReached;
+	public World b2world;
 	 
 	/**
 	 * Aaron Gerber
@@ -369,6 +380,35 @@ public class WorldController extends InputAdapter
 			scoreVisual = score;
 			level = new Level(Constants.LEVEL_01);
 			cameraHelper.setTarget(level.bunnyHead);
+		}
+		
+		/**
+		 * Creates a new box2d world with real world gravity and initializes the
+		 * bounds for rocks
+		 */
+		public void initPhysics()
+		{
+			if(b2world != null)
+				b2world.dispose();
+			b2world = new World(new Vector2(0, -9.81f), true);
+			//Rocks
+			Vector2 origin = new Vector2();
+			for(Rock rock : level.rocks)
+			{
+				BodyDef bodyDef = new BodyDef();
+				bodyDef.type = BodyType.KinematicBody;
+				bodyDef.position.set(rock.position);
+				Body body = b2world.createBody(bodyDef);
+				rock.body = body;
+				PolygonShape polygonShape = new PolygonShape();
+				origin.x = rock.bounds.width / 2.0f;
+				origin.y = rock.bounds.height / 2.0f;
+				polygonShape.setAsBox(rock.bounds.width / 2.0f, rock.bounds.height / 2.0f, origin, 0);
+				FixtureDef fixtureDef = new FixtureDef();
+				fixtureDef.shape = polygonShape;
+				body.createFixture(fixtureDef);
+				polygonShape.dispose();
+			}
 		}
 }
 
