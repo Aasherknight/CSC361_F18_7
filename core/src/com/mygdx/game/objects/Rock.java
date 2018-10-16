@@ -12,6 +12,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Assets;
 
+/**
+ * Class to handle to "rock" or land objects that 
+ * the bunnyhead platforms on
+ * @author Jeff
+ */
 public class Rock extends AbstractGameObject
 {
 	private TextureRegion regEdge;
@@ -35,6 +40,9 @@ public class Rock extends AbstractGameObject
 		init();
 	}
 	
+	/**
+	 * Initialize the rock object
+	 */
 	private void init()
 	{
 		dimension.set(1, 1.5f);
@@ -67,6 +75,9 @@ public class Rock extends AbstractGameObject
 		setLength(length + amount);
 	}
 	
+	/**
+	 * Draws the rock of appropriate size
+	 */
 	@Override
 	public void render(SpriteBatch batch)
 	{
@@ -110,7 +121,6 @@ public class Rock extends AbstractGameObject
 	public void update (float deltaTime)
 	{
 		super.update(deltaTime);
-		
 		floatCycleTimeLeft -= deltaTime;
 		
 		//If there isn't a target, give it one
@@ -121,10 +131,14 @@ public class Rock extends AbstractGameObject
 		{
 			floatCycleTimeLeft = FLOAT_CYCLE_TIME;
 			floatingDownwards = !floatingDownwards;
-			floatTargetPosition.y += FLOAT_AMPLITUDE * (floatingDownwards ? -1 : 1);
+			
+			body.setLinearVelocity(0, FLOAT_AMPLITUDE * (floatingDownwards ? -1 : 1));
+		} 
+		else 
+		{
+			body.setLinearVelocity(body.getLinearVelocity().scl(0.98f));		 
 		}
-		
-		position.lerp(floatTargetPosition, deltaTime);
+			//floatTargetPosition.y += FLOAT_AMPLITUDE * (floatingDownwards ? -1 : 1);
 	}
 }
 
