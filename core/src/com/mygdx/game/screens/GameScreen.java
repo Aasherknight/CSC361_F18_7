@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.WorldController;
 import com.mygdx.game.WorldRenderer;
 
+/**
+ * Screen class to handle graphics during gameplay
+ * @author Jeff
+ *
+ */
 public class GameScreen extends AbstractGameScreen
 {
 	private static final String TAG = GameScreen.class.getName();
@@ -74,6 +79,7 @@ public class GameScreen extends AbstractGameScreen
 	@Override
 	public void hide()
 	{
+		worldController.dispose();
 		worldRenderer.dispose();
 		Gdx.input.setCatchBackKey(false);
 	}

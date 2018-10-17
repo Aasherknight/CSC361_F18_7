@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.util.Constants;
@@ -23,6 +27,10 @@ public class WorldRenderer implements Disposable
 	private SpriteBatch batch;
 	private WorldController worldController;
 
+	//Aaron Gerber, pg 348
+	private static final boolean DEBUG_DRAW_BOX2D_WORLD = false;
+	private Box2DDebugRenderer b2debugRenderer;
+	
 	public WorldRenderer (WorldController wc)
 	{
 		worldController = wc;
@@ -40,6 +48,9 @@ public class WorldRenderer implements Disposable
 		cameraGUI.position.set(0,0,0);
 		cameraGUI.setToOrtho(true); // flip y-axis
 		cameraGUI.update();
+		
+		//Aaron Gerber, pg 349
+		b2debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	public void render ()
@@ -58,6 +69,9 @@ public class WorldRenderer implements Disposable
 		//load up the level
 		worldController.level.render(batch);
 		batch.end();
+		
+		if(DEBUG_DRAW_BOX2D_WORLD)
+			b2debugRenderer.render(worldController.b2world, camera.combined);
 	}
 	
 	private void renderGui(SpriteBatch batch)
