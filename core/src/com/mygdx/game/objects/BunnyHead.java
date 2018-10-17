@@ -113,6 +113,11 @@ public class BunnyHead extends AbstractGameObject {
 		 switch (jumpState) {
 		 	case GROUNDED:
 		 		jumpState = JUMP_STATE.FALLING;
+		 		if (velocity.x != 0)
+		 		{
+		 			dustParticles.setPosition(position.x + dimension.x / 2, position.y);
+		 			dustParticles.start();
+		 		}
 		 		break;
 		 	case JUMP_RISING:
 			  // Keep track of jump time
