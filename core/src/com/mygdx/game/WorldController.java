@@ -121,7 +121,10 @@ public class WorldController extends InputAdapter implements Disposable
 			 * Adding this because it was missing. changes from pg 234
 			 */
 			if (timeLeftGameOverDelay < 0)
+			{
 				backToMenu();
+				return;
+			}
 		}
 		else
 		{
