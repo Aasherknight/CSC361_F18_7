@@ -6,13 +6,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.objects.AbstractGameObject;
 import com.mygdx.game.objects.BunnyHead;
+import com.mygdx.game.objects.Carrot;
 import com.mygdx.game.objects.Clouds;
 import com.mygdx.game.objects.Feather;
+import com.mygdx.game.objects.Goal;
 import com.mygdx.game.objects.GoldCoin;
 import com.mygdx.game.objects.Mountains;
 import com.mygdx.game.objects.Rock;
 import com.mygdx.game.objects.WaterOverlay;
 
+/**
+ * Class for managing all objects contained within the game
+ * level
+ * @author Jeff
+ */
 public class Level 
 {
 	public static final String TAG = Level.class.getName();
