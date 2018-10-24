@@ -149,7 +149,7 @@ public class MenuScreen extends AbstractGameScreen
 		layer.add(imgLogo);
 		layer.row().expandY();
 		// + Info Logos
-		imgLogo = new Image(skinCanyonBunny, "info");
+		imgInfo = new Image(skinCanyonBunny, "info");
 		layer.add(imgInfo).bottom();
 		if (debugEnabled) layer.debug();
 		return layer;
