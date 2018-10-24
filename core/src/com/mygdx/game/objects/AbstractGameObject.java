@@ -7,6 +7,7 @@
 package com.mygdx.game.objects;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -32,7 +33,7 @@ public abstract class AbstractGameObject {
 	
 	//ch12 Aaron Gerber
 	public float stateTime;
-	public Animation animation;
+	public Animation<TextureRegion> animation;
 	
 	public AbstractGameObject () {
 		position = new Vector2();
@@ -110,7 +111,7 @@ public abstract class AbstractGameObject {
 	 * Set the animation for this game object
 	 * @param animation - the Animation to be used for this object
 	 */
-	public void setAnimation(Animation animation)
+	public void setAnimation(Animation<TextureRegion> animation)
 	{
 		this.animation = animation;
 		stateTime = 0;

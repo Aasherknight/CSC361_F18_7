@@ -31,10 +31,10 @@ public class BunnyHead extends AbstractGameObject {
 	  * Aaron Gerber -ch12
 	  * the set of animations for BunnyHead
 	  */
-	 private Animation animNormal;
-	 private Animation animCopterTransform;
-	 private Animation animCopterTransformBack;
-	 private Animation animCopterRotate;
+	 private Animation<TextureRegion> animNormal;
+	 private Animation<TextureRegion> animCopterTransform;
+	 private Animation<TextureRegion> animCopterTransformBack;
+	 private Animation<TextureRegion> animCopterRotate;
 	 
 	 public BunnyHead () 
 	 {
@@ -48,6 +48,7 @@ public class BunnyHead extends AbstractGameObject {
 		 animCopterTransform = Assets.instance.bunny.animCopterTransform;
 		 animCopterTransformBack = Assets.instance.bunny.animCopterTransformBack;
 		 animCopterRotate = Assets.instance.bunny.animCopterRotate;
+		 setAnimation(animNormal);
 		 
 		 // Center image on game object
 		 origin.set(dimension.x / 2, dimension.y / 2);
@@ -144,13 +145,12 @@ public class BunnyHead extends AbstractGameObject {
 					 setAnimation(animCopterRotate);
 		 }
 		 else
-			 if(animation == animCopterRotate)
+			 if(animation == animCopterRotate || animation == animCopterTransformBack)
 			 {
-				 if(animation.isAnimationFinished(stateTime))
+				 if(animation.isAnimationFinished(stateTime) && animation == animCopterRotate)
 					 setAnimation(animCopterTransformBack);
-				 else if(animation == animCopterTransformBack)
-					 if(animation.isAnimationFinished(stateTime))
-						 setAnimation(animNormal);
+				 else if(animation.isAnimationFinished(stateTime) && animation == animCopterTransformBack)
+					 setAnimation(animNormal);
 			 }
 	 }
 	 @Override
@@ -217,7 +217,7 @@ public class BunnyHead extends AbstractGameObject {
 		 }
 		 
 		 // Draw image
-		 reg = (TextureRegion) animation.getKeyFrame(stateTime,true);
+		 reg = animation.getKeyFrame(stateTime,true);
 		 
 		 batch.draw(reg.getTexture(),
 				 position.x, position.y,
