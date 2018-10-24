@@ -42,7 +42,7 @@ public class GoldCoin extends AbstractGameObject
 		if(collected) return;
 		
 		TextureRegion reg = null;
-		reg = (TextureRegion) animation.getKeyFrame(stateTime, true);
+		reg = animation.getKeyFrame(stateTime, true);
 		
 		batch.draw(reg.getTexture(), position.x, position.y, origin.x, origin.y, 
 				dimension.x, dimension.y, scale.x, scale.y, rotation, reg.getRegionX(),
