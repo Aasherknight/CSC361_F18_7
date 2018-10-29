@@ -7,9 +7,11 @@
 package com.mygdx.game.objects;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 /**
  * Class that all game objects inherit properties from
@@ -29,6 +31,10 @@ public abstract class AbstractGameObject {
 	public Rectangle bounds;
 	public Body body;
 	
+	//ch12 Aaron Gerber
+	public float stateTime;
+	public Animation<TextureRegion> animation;
+	
 	public AbstractGameObject () {
 		position = new Vector2();
 		dimension = new Vector2(1, 1);
@@ -41,6 +47,7 @@ public abstract class AbstractGameObject {
 		acceleration = new Vector2();
 		bounds = new Rectangle();
 	}
+	
 	protected void updateMotionX (float deltaTime) {
 			 if (velocity.x != 0) 
 			 {
@@ -60,10 +67,11 @@ public abstract class AbstractGameObject {
 		 // positive or negative terminal velocity
 		 velocity.x = MathUtils.clamp(velocity.x,
 		 -terminalVelocity.x, terminalVelocity.x);
-		}
-		protected void updateMotionY (float deltaTime) {
-			 if (velocity.y != 0) {
-			 // Apply friction
+	}
+
+	protected void updateMotionY (float deltaTime) {
+		 if (velocity.y != 0) {
+		 // Apply friction
 			 if (velocity.y > 0) {
 			 velocity.y = Math.max(velocity.y - friction.y *
 			deltaTime, 0);
@@ -72,15 +80,17 @@ public abstract class AbstractGameObject {
 			deltaTime, 0);
 			 }
 		 }
-		 // Apply acceleration
-		 velocity.y += acceleration.y * deltaTime;
-		 // Make sure the object's velocity does not exceed the
-		 // positive or negative terminal velocity
-		 velocity.y = MathUtils.clamp(velocity.y, -
-				 terminalVelocity.y, terminalVelocity.y);
-				 }
+	 // Apply acceleration
+	 velocity.y += acceleration.y * deltaTime;
+	 // Make sure the object's velocity does not exceed the
+	 // positive or negative terminal velocity
+	 velocity.y = MathUtils.clamp(velocity.y, -
+			 terminalVelocity.y, terminalVelocity.y);
+	}
+	
 	public void update (float deltaTime) 
 	{
+		stateTime += deltaTime;
 		if (body == null) 
 		{
 			updateMotionX(deltaTime);
@@ -95,5 +105,17 @@ public abstract class AbstractGameObject {
 			rotation = body.getAngle() * MathUtils.radiansToDegrees;
 	    }
 	}
+	
+	/**
+	 * Aaron Gerber - Ch12
+	 * Set the animation for this game object
+	 * @param animation - the Animation to be used for this object
+	 */
+	public void setAnimation(Animation<TextureRegion> animation)
+	{
+		this.animation = animation;
+		stateTime = 0;
+	}
+	
 	public abstract void render (SpriteBatch batch);
 }

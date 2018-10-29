@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Assets;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.GamePreferences;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.util.AudioManager;
+import com.mygdx.game.util.CharacterSkin;
 
 public class BunnyHead extends AbstractGameObject {
 	 public static final String TAG = BunnyHead.class.getName();
@@ -24,13 +27,29 @@ public class BunnyHead extends AbstractGameObject {
 	 public float timeLeftFeatherPowerup;
 	 public ParticleEffect dustParticles = new ParticleEffect();
 	 
+	 /**
+	  * Aaron Gerber -ch12
+	  * the set of animations for BunnyHead
+	  */
+	 private Animation<TextureRegion> animNormal;
+	 private Animation<TextureRegion> animCopterTransform;
+	 private Animation<TextureRegion> animCopterTransformBack;
+	 private Animation<TextureRegion> animCopterRotate;
+	 
 	 public BunnyHead () 
 	 {
 		 init();
 	 }
 	 public void init () {
 		 dimension.set(1, 1);
-		 regHead = Assets.instance.bunny.head;
+		 
+		 //Applying set of animations ch12 - Aaron Gerber
+		 animNormal = Assets.instance.bunny.animNormal;
+		 animCopterTransform = Assets.instance.bunny.animCopterTransform;
+		 animCopterTransformBack = Assets.instance.bunny.animCopterTransformBack;
+		 animCopterRotate = Assets.instance.bunny.animCopterRotate;
+		 setAnimation(animNormal);
+		 
 		 // Center image on game object
 		 origin.set(dimension.x / 2, dimension.y / 2);
 		 // Bounding box for collision detection
@@ -97,15 +116,42 @@ public class BunnyHead extends AbstractGameObject {
 		 }
 		 if (timeLeftFeatherPowerup > 0) 
 		 {
+			 if(animation == animCopterTransformBack)
+			 {
+				 //Restart "transform animation if another feather power up 
+				 // was picked up during "transformBack" animation. Otherwise,
+				 // the "transformBack" animation would be stuck while the power-up
+				 // is still active
+				 setAnimation(animCopterTransform);
+			 }
 			 timeLeftFeatherPowerup -= deltaTime;
 			 if (timeLeftFeatherPowerup < 0) 
 			 {
 				 // disable power-up
 				 timeLeftFeatherPowerup = 0;
 				 setFeatherPowerup(false);
+				 setAnimation(animCopterTransformBack);
 			 }
 		 }
 		 dustParticles.update(deltaTime);
+		 
+		 //Change animation state according to feather power-up
+		 if(hasFeatherPowerup)
+		 {
+			 if(animation == animNormal)
+				 setAnimation(animCopterTransform);
+			 else if(animation == animCopterTransform)
+				 if(animation.isAnimationFinished(stateTime))
+					 setAnimation(animCopterRotate);
+		 }
+		 else
+			 if(animation == animCopterRotate || animation == animCopterTransformBack)
+			 {
+				 if(animation.isAnimationFinished(stateTime) && animation == animCopterRotate)
+					 setAnimation(animCopterTransformBack);
+				 else if(animation.isAnimationFinished(stateTime) && animation == animCopterTransformBack)
+					 setAnimation(animNormal);
+			 }
 	 }
 	 @Override
 	 protected void updateMotionY (float deltaTime) 
@@ -148,18 +194,43 @@ public class BunnyHead extends AbstractGameObject {
 	 @Override
 	 public void render (SpriteBatch batch) {
 		 TextureRegion reg = null;
-		 // Set special color when game object has a feather power-up
+
 		// Draw Particles
 		 dustParticles.draw(batch);
 		 if (hasFeatherPowerup) {
 			 batch.setColor(1.0f, 0.8f, 0.0f, 1.0f);
 		 }
+		 
+		 /**
+		  * Aaron Gerber - ch12
+		  * updating this section due to the change of using Animation
+		  */
+		 //Apply Skin Color
+		 batch.setColor(CharacterSkin.values()[GamePreferences.instance.charSkin].getColor());
+		 
+		 float dimCorrectionX = 0;
+		 float dimCorrectionY = 0;
+		 if(animation!=animNormal)
+		 {
+			 dimCorrectionX = 0.05f;
+			 dimCorrectionY = 0.2f;
+		 }
+		 
 		 // Draw image
-		 reg = regHead;
-		 batch.draw(reg.getTexture(), position.x, position.y, origin.x,origin.y, dimension.x, dimension.y, scale.x, scale.y, 
-		 rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(),
+		 reg = animation.getKeyFrame(stateTime,true);
+		 
+		 batch.draw(reg.getTexture(),
+				 position.x, position.y,
+				 origin.x,origin.y,
+				 dimension.x + dimCorrectionX, dimension.y + dimCorrectionY,
+				 scale.x, scale.y, 
+				 rotation,
+				 reg.getRegionX(), reg.getRegionY(),
+				 reg.getRegionWidth(),
 		 reg.getRegionHeight(), viewDirection == VIEW_DIRECTION.LEFT,
 		 false);
+		 
+		 //End of ch12 changes
 
 		 // Reset color to white
 		 batch.setColor(1, 1, 1, 1);
